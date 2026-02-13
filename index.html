@@ -59,46 +59,51 @@
 </head>
 <body class="flex h-screen bg-gray-50 text-gray-800">
 
-    <aside class="w-72 bg-indigo-900 text-white flex flex-col shadow-xl">
-        <div class="p-6 border-b border-indigo-800">
+    <button onclick="toggleSidebar()" class="lg:hidden fixed top-4 left-4 z-50 bg-indigo-900 text-white p-2 rounded-md shadow-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+    </button>
+
+    <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/50 z-30 hidden lg:hidden"></div>
+
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 w-72 bg-indigo-900 text-white flex flex-col shadow-xl transform -translate-x-full lg:translate-x-0 lg:static lg:inset-0 transition-transform duration-300 ease-in-out">
+        <div class="p-6 border-b border-indigo-800 flex justify-between items-center">
             <h1 class="font-bold text-lg leading-tight">Organization & Functions Guide (DGI)</h1>
+            <button onclick="toggleSidebar()" class="lg:hidden text-indigo-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
         </div>
         
         <nav class="flex-1 overflow-y-auto p-4 space-y-2">
 
-            <button onclick="showSection('agenda')" class="w-full text-left p-2 font-bold text-indigo-300 hover:bg-indigo-800 rounded-lg transition mb-2 border border-indigo-700 bg-indigo-800/50">
+            <button onclick="showSection('agenda'); toggleSidebar()" class="w-full text-left p-2 font-bold text-indigo-300 hover:bg-indigo-800 rounded-lg transition mb-2 border border-indigo-700 bg-indigo-800/50">
                 📅 AGENDA
             </button>
             
-            <button onclick="showSection('infografia')" class="w-full text-left p-2 font-bold text-indigo-300 hover:bg-indigo-800 rounded-lg transition mb-2 border border-indigo-700">
+            <button onclick="showSection('infografia'); toggleSidebar()" class="w-full text-left p-2 font-bold text-indigo-300 hover:bg-indigo-800 rounded-lg transition mb-2 border border-indigo-700">
                 🏠 HOME / INFOGRAPHIC
             </button>
 
-            <button onclick="showSection('structure')" class="w-full text-left p-2 font-bold text-indigo-300 hover:bg-indigo-800 rounded-lg transition mb-2 border border-indigo-700">
+            <button onclick="showSection('structure'); toggleSidebar()" class="w-full text-left p-2 font-bold text-indigo-300 hover:bg-indigo-800 rounded-lg transition mb-2 border border-indigo-700">
                 📊 STRUCTURE OVERVIEW
             </button>
 
-            <button onclick="showSection('pdf-viewer')" class="w-full text-left p-2 font-bold text-indigo-300 hover:bg-indigo-800 rounded-lg transition mb-4 border border-indigo-700">
+            <button onclick="showSection('pdf-viewer'); toggleSidebar()" class="w-full text-left p-2 font-bold text-indigo-300 hover:bg-indigo-800 rounded-lg transition mb-4 border border-indigo-700">
                 📄 FOUNDATIONS PDF
             </button>
 
-           
-
-            <button onclick="showSection('pilares')" class="w-full text-left p-2 font-bold text-indigo-300 hover:bg-indigo-800 rounded-lg transition mb-2 border border-indigo-700">
+            <button onclick="showSection('pilares'); toggleSidebar()" class="w-full text-left p-2 font-bold text-indigo-300 hover:bg-indigo-800 rounded-lg transition mb-2 border border-indigo-700">
                 🏛️ GOVERNANCE ELEMENTS
             </button>
 
-            <button onclick="showSection('use-cases')" class="w-full text-left p-2 font-bold text-indigo-300 hover:bg-indigo-800 rounded-lg transition mb-2 border border-indigo-700">
+            <button onclick="showSection('use-cases'); toggleSidebar()" class="w-full text-left p-2 font-bold text-indigo-300 hover:bg-indigo-800 rounded-lg transition mb-2 border border-indigo-700">
                 💡 USE CASES
             </button>
 
-           <!-- <button onclick="showSection('demos')" class="w-full text-left p-2 font-bold text-indigo-300 hover:bg-indigo-800 rounded-lg transition mb-2 border border-indigo-700">
-                🚀 DEMOS
-            </button>-->
-
-
-           
-        </nav>
+            </nav>
     </aside>
 
     <main class="flex-1 overflow-y-auto p-12 bg-white">
@@ -487,6 +492,19 @@
             }
         }
 
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+    
+    // Solo actúa si la pantalla es móvil (menos de 1024px)
+    if (window.innerWidth < 1024) {
+        sidebar.classList.toggle('-translate-x-full');
+        overlay.classList.toggle('hidden');
+    }
+}
+        
+        
+        
         // Esta función controla el cuadro de información de los 6 Pilares
         function updatePillarInfo(title, subtitle, description) {
             const box = document.getElementById('pillar-content-box');
@@ -505,4 +523,5 @@
     </script>
 </body>
 </html>
+
 
