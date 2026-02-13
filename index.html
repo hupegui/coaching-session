@@ -469,18 +469,30 @@
             document.querySelectorAll('.content-section').forEach(section => {
                 section.classList.remove('active');
             });
-
+    
             // 2. Buscamos la sección que el usuario clickeó y le ponemos 'active'
             const selectedSection = document.getElementById(id);
             if (selectedSection) {
                 selectedSection.classList.add('active');
             }
-
-            // 3. Opcional: Volver al inicio del scroll cada vez que cambias de sección
+    
+            // 3. Volver al inicio del scroll cada vez que cambias de sección
             document.querySelector('main').scrollTop = 0;
         }
-
-        // Esta función controla el despliegue de los submenús (I. Introducción, etc.)
+    
+        // Nueva función para la hamburguesa
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            
+            // Solo actúa si la pantalla es móvil (menos de 1024px)
+            if (window.innerWidth < 1024) {
+                sidebar.classList.toggle('-translate-x-full');
+                overlay.classList.toggle('hidden');
+            }
+        }
+    
+        // Esta función controla el despliegue de los submenús
         function toggleSubmenu(id) {
             const menu = document.getElementById(id);
             const icon = document.getElementById('icon-' + id);
@@ -491,20 +503,7 @@
                 icon.style.transform = menu.classList.contains('open') ? 'rotate(90deg)' : 'rotate(0deg)';
             }
         }
-
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebar-overlay');
     
-    // Solo actúa si la pantalla es móvil (menos de 1024px)
-    if (window.innerWidth < 1024) {
-        sidebar.classList.toggle('-translate-x-full');
-        overlay.classList.toggle('hidden');
-    }
-}
-        
-        
-        
         // Esta función controla el cuadro de información de los 6 Pilares
         function updatePillarInfo(title, subtitle, description) {
             const box = document.getElementById('pillar-content-box');
@@ -514,7 +513,6 @@
                     <p class="text-indigo-600 font-bold mb-4 uppercase text-sm tracking-widest">${subtitle}</p>
                     <p class="text-slate-700 text-2xl leading-relaxed">${description}</p>
                 `;
-                // Reiniciar animación para que el usuario note el cambio
                 box.style.animation = 'none';
                 box.offsetHeight; 
                 box.style.animation = 'fadeIn 0.5s ease-out';
@@ -523,5 +521,6 @@
     </script>
 </body>
 </html>
+
 
 
