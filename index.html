@@ -78,7 +78,6 @@
         </div>
         
         <nav class="flex-1 overflow-y-auto p-4 space-y-2">
-
             <button onclick="showSection('agenda'); toggleSidebar()" class="w-full text-left p-2 font-bold text-indigo-300 hover:bg-indigo-800 rounded-lg transition mb-2 border border-indigo-700 bg-indigo-800/50">
                 📅 AGENDA
             </button>
@@ -479,8 +478,8 @@
             // 3. Volver al inicio del scroll cada vez que cambias de sección
             document.querySelector('main').scrollTop = 0;
         }
-    
-        // Nueva función para la hamburguesa
+
+         // Nueva función para la hamburguesa
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebar-overlay');
@@ -491,6 +490,9 @@
                 overlay.classList.toggle('hidden');
             }
         }
+
+ 
+        
     
         // Esta función controla el despliegue de los submenús
         function toggleSubmenu(id) {
@@ -521,6 +523,7 @@
     </script>
 </body>
 </html>
+
 
 
 
